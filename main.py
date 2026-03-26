@@ -31,15 +31,14 @@ try:
             base_name = name.split()[0]
             result[base_name] = result.get(base_name, 0) + quantity
 
-        with open(output_file, "w", encoding="utf-8", newline='') as copy:
-            writer = csv.writer(copy)
-            writer.writerow(["Продукт", "Общее количество"])
+        with open(output_file, "w", encoding="utf-8") as copy:
+            copy.write("Результат группировки:\n")
             for product, total in result.items():
-                writer.writerow([product, total])
-        
+                copy.write(f"{product}: {total}\n")
+
         print("Результат группировки:")
         for product, total in result.items():
-            print(f"{product}, ({total})")
+            print(f"{product}: {total}")
         
         print(f"\nЗапись сохранена в {output_file}")
 
