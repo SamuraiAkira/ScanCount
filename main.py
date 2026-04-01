@@ -13,6 +13,23 @@ def resource_path(relative_path):
     
     return os.path.join(base_path, relative_path)
 
+def get_project_path():
+    """Получить путь к папке проекта (где находится exe файл)"""
+    if getattr(sys, 'frozen', False):
+        return os.path.dirname(sys.executable)
+    else:
+        return os.path.dirname(os.path.abspath(__file__))
+
+def save_result_to_file(result_text):
+    """Сохраняет результат в файл output.txt в директории проекта"""
+    try:
+        output_path = os.path.join(get_project_path(), "output.txt")
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(result_text)
+        return output_path
+    except Exception as e:
+        raise Exception(f"Ошибка при сохранении файла: {e}")
+
 class ProductProcessorApp:
     def __init__(self, root):
         self.root = root
@@ -40,7 +57,7 @@ class ProductProcessorApp:
         """Загружает правила группировки из файла."""
         rules = []
         try:
-            rules_path = resource_path(rules_file)
+            rules_path = os.path.join(get_project_path(), rules_file)
             with open(rules_path, "r", encoding="utf-8") as f:
                 for line in f:
                     line = line.strip()
@@ -48,9 +65,9 @@ class ProductProcessorApp:
                         rules.append(line)
             rules.sort(key=len, reverse=True)
             if rules:
-                self.log(f"Загружено {len(rules)} правил группировки из {rules_file}")
+                self.log(f"Загружено {len(rules)} правил группировки из {rules_path}")
             else:
-                self.log(f"Файл {rules_file} не содержит правил")
+                self.log(f"Файл {rules_path} не содержит правил")
         except FileNotFoundError:
             self.log(f"Файл {rules_file} не найден. Группировка будет по первому слову.")
         except Exception as e:
@@ -214,6 +231,12 @@ class ProductProcessorApp:
         for product, total in result.items():
             result_lines.append(f"{product}: {total}")
         result_text = "\n".join(result_lines)
+        
+        try:
+            output_path = save_result_to_file(result_text)
+            self.log(f"Результат сохранён в файл: {output_path}")
+        except Exception as e:
+            self.log(str(e))
 
         self.show_result_window(result_text)
         self.log("Операция завершена.")
