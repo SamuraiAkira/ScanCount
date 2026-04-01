@@ -1,29 +1,47 @@
+import os
+import sys
 import re
 import tkinter as tk
 from tkinter import scrolledtext, messagebox
 
+def resource_path(relative_path):
+    """Получить абсолютный путь к ресурсу, работает для dev и для PyInstaller"""
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    
+    return os.path.join(base_path, relative_path)
 
 class ProductProcessorApp:
     def __init__(self, root):
         self.root = root
         self.root.title("ScanCount")
-        self.root.iconbitmap("logo.ico")
+        
+        try:
+            icon_path = resource_path("logo.ico")
+            if os.path.exists(icon_path):
+                self.root.iconbitmap(icon_path)
+            else:
+                print(f"Иконка не найдена: {icon_path}")
+        except Exception as e:
+            print(f"Не удалось установить иконку: {e}")
+        
         self.root.geometry("750x650")
         self.root.configure(bg="#2a2a3a")
         self.root.resizable(True, True)
-
+        
         self.rules = []
         self.create_widgets()
         self.load_rules()
         self.center_window()
 
     def load_rules(self, rules_file="rules.txt"):
-        """Загружает правила группировки из файла.
-        Возвращает список правил, отсортированный по убыванию длины.
-        Игнорирует строки, начинающиеся с '#' и пустые."""
+        """Загружает правила группировки из файла."""
         rules = []
         try:
-            with open(rules_file, "r", encoding="utf-8") as f:
+            rules_path = resource_path(rules_file)
+            with open(rules_path, "r", encoding="utf-8") as f:
                 for line in f:
                     line = line.strip()
                     if line and not line.startswith('#'):
@@ -197,13 +215,6 @@ class ProductProcessorApp:
             result_lines.append(f"{product}: {total}")
         result_text = "\n".join(result_lines)
 
-        try:
-            with open("output.txt", "w", encoding="utf-8") as f:
-                f.write(result_text)
-            self.log(f"Результат сохранён в output.txt")
-        except Exception as e:
-            self.log(f"Ошибка сохранения в файл: {e}")
-
         self.show_result_window(result_text)
         self.log("Операция завершена.")
 
@@ -222,6 +233,13 @@ class ProductProcessorApp:
         x = (screen_width // 2) - (width // 2)
         y = (screen_height // 2) - (height // 2)
         result_win.geometry(f'{width}x{height}+{x}+{y}')
+
+        try:
+            icon_path = resource_path("logo.ico")
+            if os.path.exists(icon_path):
+                result_win.iconbitmap(icon_path)
+        except:
+            pass
 
         frame = tk.LabelFrame(result_win, text="Сгруппированные данные", bg="#2a2a3a", fg="white",
                               font=("Arial", 10, "bold"), padx=5, pady=5)
