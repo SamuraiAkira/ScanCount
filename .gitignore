@@ -1,2 +1,6 @@
 output.txt
 
+# PyInstaller
+*.spec
+dist/
+build/
