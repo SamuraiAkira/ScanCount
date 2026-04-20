@@ -1,5 +1,10 @@
 output.txt
 
+# PyInstaller
+*.spec
+dist/
+build/
+
 # Python
 __pycache__/
 *.py[cod]
