@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ScanCount</title>
     <link rel="icon" href="logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="/eel.js"></script>
 </head>
 <body class="dark">
     <div class="container">
         <header>
-            <h1>ScanCount</h1>
+            <div class="logo">
+                <i class="fas fa-cubes"></i>
+                <h1>ScanCount</h1>
+            </div>
             <div class="theme-switch-wrapper">
                 <label class="theme-switch">
                     <input type="checkbox" id="theme-toggle" checked>
@@ -23,22 +27,24 @@
 
         <div class="input-section card">
             <div class="card-header">
-                <h2>Входные данные</h2>
+                <h2><i class="fas fa-keyboard"></i> Входные данные</h2>
                 <div class="button-group">
-                    <button id="paste-btn" class="btn">📋 Вставить</button>
-                    <button id="clear-input-btn" class="btn">🗑️ Очистить</button>
+                    <button id="paste-btn" class="btn"><i class="fas fa-paste"></i> Вставить</button>
+                    <button id="clear-input-btn" class="btn"><i class="fas fa-trash-alt"></i> Очистить</button>
                 </div>
             </div>
-            <textarea id="input-data" placeholder="Введите данные в формате: название цена количество (каждая запись с новой строки)"></textarea>
-            <div class="hint">Формат строк: название цена количество (через пробел)</div>
+            <div class="editor-wrapper">
+                <textarea id="input-data" placeholder="Введите данные в формате: название цена количество (каждая запись с новой строки)"></textarea>
+            </div>
+            <div class="hint"><i class="fas fa-info-circle"></i> Формат строк: название цена количество (через пробел)</div>
         </div>
 
-        <button id="process-btn" class="btn primary">⚙️ Обработать</button>
+        <button id="process-btn" class="btn primary"><i class="fas fa-play"></i> Обработать</button>
 
         <div class="log-section card">
             <div class="card-header">
-                <h2>Лог выполнения</h2>
-                <button id="clear-log-btn" class="btn">🗑️ Очистить лог</button>
+                <h2><i class="fas fa-terminal"></i> Лог выполнения</h2>
+                <button id="clear-log-btn" class="btn"><i class="fas fa-trash-alt"></i> Очистить лог</button>
             </div>
             <div id="log-container" class="log-container"></div>
         </div>
@@ -46,8 +52,8 @@
         <div id="result-modal" class="modal">
             <div class="modal-content card">
                 <div class="modal-header">
-                    <h2>Результат обработки</h2>
-                    <button class="close-btn" id="close-modal-btn">&times;</button>
+                    <h2><i class="fas fa-clipboard-check"></i> Результат обработки</h2>
+                    <button class="close-btn" id="close-modal-btn"><i class="fas fa-times"></i></button>
                 </div>
                 <pre id="result-content"></pre>
             </div>
