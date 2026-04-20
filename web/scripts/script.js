@@ -40,7 +40,7 @@
             }
             if (response.result) {
                 elements.resultContent.textContent = response.result;
-                elements.modal.style.display = 'flex';
+                elements.modal.classList.add('show');
             }
         } catch (err) {
             addLog(`Ошибка: ${err.message}`);
@@ -49,9 +49,13 @@
 
     async function pasteFromClipboard() {
         try {
-            const text = await navigator.clipboard.readText();
-            elements.input.value = text;
-            addLog('Данные вставлены из буфера обмена.');
+            const text = await eel.paste_from_clipboard()();
+            if (text && typeof text === 'string') {
+                elements.input.value = text;
+                addLog('Данные вставлены из буфера обмена.');
+            } else {
+                addLog('Буфер обмена пуст или недоступен.');
+            }
         } catch (err) {
             addLog('Не удалось вставить из буфера: нет доступа или буфер пуст.');
         }
@@ -88,7 +92,7 @@
     }
 
     function closeModal() {
-        elements.modal.style.display = 'none';
+        elements.modal.classList.remove('show');
     }
 
     window.addEventListener('click', (e) => {

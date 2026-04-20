@@ -1,4 +1,3 @@
-import os
 import sys
 import eel
 import tkinter as tk
@@ -13,6 +12,17 @@ eel.init('web')
 def process_data(data):
     result_text, logs = processor.process_data(data)
     return {'result': result_text, 'logs': logs}
+
+@eel.expose
+def paste_from_clipboard():
+    try:
+        root = tk.Tk()
+        root.withdraw()
+        clipboard_text = root.clipboard_get()
+        root.destroy()
+        return clipboard_text
+    except:
+        return ""
 
 def get_screen_center(width, height):
     root = tk.Tk()
