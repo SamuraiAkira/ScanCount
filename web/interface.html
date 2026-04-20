@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScanCount</title>
+    <link rel="icon" href="logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="/eel.js"></script>
+</head>
+<body class="dark">
+    <div class="container">
+        <header>
+            <h1>ScanCount</h1>
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch">
+                    <input type="checkbox" id="theme-toggle" checked>
+                    <span class="slider"></span>
+                </label>
+                <span class="theme-label" id="theme-label">Тёмная тема</span>
+            </div>
+        </header>
+
+        <div class="input-section card">
+            <div class="card-header">
+                <h2>Входные данные</h2>
+                <div class="button-group">
+                    <button id="paste-btn" class="btn">📋 Вставить</button>
+                    <button id="clear-input-btn" class="btn">🗑️ Очистить</button>
+                </div>
+            </div>
+            <textarea id="input-data" placeholder="Введите данные в формате: название цена количество (каждая запись с новой строки)"></textarea>
+            <div class="hint">Формат строк: название цена количество (через пробел)</div>
+        </div>
+
+        <button id="process-btn" class="btn primary">⚙️ Обработать</button>
+
+        <div class="log-section card">
+            <div class="card-header">
+                <h2>Лог выполнения</h2>
+                <button id="clear-log-btn" class="btn">🗑️ Очистить лог</button>
+            </div>
+            <div id="log-container" class="log-container"></div>
+        </div>
+
+        <div id="result-modal" class="modal">
+            <div class="modal-content card">
+                <div class="modal-header">
+                    <h2>Результат обработки</h2>
+                    <button class="close-btn" id="close-modal-btn">&times;</button>
+                </div>
+                <pre id="result-content"></pre>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/script.js"></script>
+</body>
+</html>
