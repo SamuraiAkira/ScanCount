@@ -154,10 +154,6 @@ input:checked + .slider:before {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.card:hover {
-    box-shadow: 0 16px 20px -5px rgba(0, 0, 0, 0.1), 0 8px 8px -5px rgba(0, 0, 0, 0.04);
-}
-
 .card-header {
     display: flex;
     justify-content: space-between;
@@ -208,7 +204,7 @@ h2 i {
 
 .btn:hover {
     background-color: var(--accent-hover);
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     box-shadow: 0 6px 10px -4px rgba(74, 111, 165, 0.3);
 }
 
@@ -232,7 +228,7 @@ h2 i {
 
 .btn.primary:hover {
     background: linear-gradient(145deg, var(--accent-hover), #4e6e9e);
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     box-shadow: 0 10px 16px -6px rgba(74, 111, 165, 0.5);
 }
 
@@ -380,8 +376,7 @@ textarea {
 }
 
 .close-btn:hover {
-    background-color: var(--log-bg);
-    color: var(--accent);
+    color: linear-gradient(145deg, var(--accent-hover), #4e6e9e);
 }
 
 pre {
