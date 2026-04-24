@@ -2,7 +2,6 @@ import sys
 import eel
 import tkinter as tk
 from processor import ProductProcessor
-from utils import get_project_path
 
 processor = ProductProcessor()
 
