@@ -392,3 +392,48 @@ pre {
     font-size: 0.9rem;
     line-height: 1.5;
 }
+.modal-content::-webkit-scrollbar,
+.log-container::-webkit-scrollbar,
+textarea::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track,
+.log-container::-webkit-scrollbar-track,
+textarea::-webkit-scrollbar-track {
+    background: var(--log-bg);
+    border-radius: 12px;
+    margin: 4px 0;
+}
+
+.modal-content::-webkit-scrollbar-thumb,
+.log-container::-webkit-scrollbar-thumb,
+textarea::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 12px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: background 0.2s ease;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover,
+.log-container::-webkit-scrollbar-thumb:hover,
+textarea::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.modal-content::-webkit-scrollbar-corner,
+.log-container::-webkit-scrollbar-corner,
+textarea::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+.modal-content,
+.log-container,
+textarea {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) var(--log-bg);
+}
